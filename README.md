@@ -31,11 +31,39 @@ int             main()
     }
 }
 ```
+Reference
+---------
+```C
+t_firmata       *firmata_new(char *name)
+```
+* name: path to device, usually "/dev/ttyACM0"
+
+```C
+int             firmata_pinMode(t_firmata *firmata, int pin, int mode)
+```
+* pin: #pin
+* mode: pinMode can be: MODE_INPUT, MODE_OUTPUT, MODE_SERVO, MODE_PWM, MODE_ANALOG, MODE_SHIFT, MODE_I2C 
+
+```C
+int             firmata_digitalWrite(t_firmata *firmata, int pin, int value)
+```
+
+* pin: #pin
+* value: can be HIGH or LOW
+
+```C
+int             firmata_analogWrite(t_firmata *firmata, int pin, int value)
+```
+* pin: #pin
+* value: #value
+
+For more information see the [Arduino documentation](http://arduino.cc/en/Reference/HomePage).
+
 
 Issues
 ------
 
-For the moment, only the pinMode() and digitalWrite() were implemented and tested.
+For the moment, only the pinMode() and digitalWrite(), analogWrite() were implemented and tested.
 
 License
 -------
