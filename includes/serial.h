@@ -33,8 +33,8 @@ typedef struct		s_serial
   int			port_fd;
   struct termios	settings_orig;
   struct termios	settings;
-
-
+  int			tx;
+  int			rx;
 }			t_serial;
 
 t_serial		*serial_new();

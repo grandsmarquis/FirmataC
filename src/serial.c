@@ -43,6 +43,8 @@ t_serial	*serial_new()
     }
   res->port_is_open = 0;
   res->baud_rate = 38400;
+  res->tx = 0;
+  res->rx = 0;
   return (res);
 }
 
@@ -204,6 +206,7 @@ int		serial_read(t_serial *serial, void *ptr, int count)
     return (0);
   if (n == 0 && ioctl(serial->port_fd, TIOCMGET, &bits) < 0)
     return (-99);
+  serial->rx += n;
   return (n);
 }
 
@@ -231,7 +234,8 @@ int		serial_write(t_serial *serial, void *ptr, int len)
       if (n <= 0) return -1;
     }
   }
-  return written;
+  serial->tx += written;
+  return (written);
 }
 
 int		serial_waitInput(t_serial *serial, int msec)
@@ -243,7 +247,7 @@ int		serial_waitInput(t_serial *serial, int msec)
   tv.tv_usec = (msec % 1000) * 1000;
   FD_ZERO(&rfds);
   FD_SET(serial->port_fd, &rfds);
-  return select(serial->port_fd+1, &rfds, NULL, NULL, &tv);
+  return (select(serial->port_fd+1, &rfds, NULL, NULL, &tv));
 }
 
 int		serial_discardInput(t_serial *serial)
