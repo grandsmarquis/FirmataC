@@ -3,6 +3,8 @@ FirmataC
 
 This is a simple and lightweigh C library to communicate with Firmata devices such as Arduino.
 
+This library implements [Firmata V2.3](http://firmata.org/wiki/Protocol).
+
 Example
 -------
 
@@ -34,3 +36,13 @@ Issues
 ------
 
 For the moment, only the pinMode() and digitalWrite() were implemented and tested.
+
+License
+-------
+
+See License file included in sources.
+
+Thanks
+------
+
+Special thanks to Paul Stoffregen for is Firmata GUI-friendly that helped much!
