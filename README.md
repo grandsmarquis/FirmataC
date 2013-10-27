@@ -17,19 +17,24 @@ int             main()
 {
   t_firmata     *firmata;
   int           i = 0;
-
+  
+  //init Firmata
   firmata = firmata_new("/dev/ttyACM0");
-  sleep(5);
-  firmata_pinMode(firmata, 13, MODE_OUTPUT);
+  //Wait until device is up 
+  while(!firmata->isReady)
+    firmata_pull(firmata);
+  //set pin 13 (led on most arduino) to out  
+  firmata_pinMode(firmata, 13, MODE_OUTPUT); 
   while (1)
     {
       sleep(1);
       if (i++ % 2)
-        firmata_digitalWrite(firmata, 13, HIGH);
+        firmata_digitalWrite(firmata, 13, HIGH); //light led
       else
-        firmata_digitalWrite(firmata, 13, LOW);
+        firmata_digitalWrite(firmata, 13, LOW);	//unlight led 
     }
 }
+
 ```
 Reference
 ---------
@@ -57,13 +62,13 @@ int             firmata_analogWrite(t_firmata *firmata, int pin, int value)
 * pin: #pin
 * value: #value
 
+```C
+int             firmata_pull(t_firmata *firmata)
+```
+Pull input. To read values about captor refer to firmata->pins\[nbPin] (described in "includes/firmata.h").
+
 For more information see the [Arduino documentation](http://arduino.cc/en/Reference/HomePage).
 
-
-Issues
-------
-
-For the moment, only the pinMode() and digitalWrite(), analogWrite() were implemented and tested.
 
 License
 -------
