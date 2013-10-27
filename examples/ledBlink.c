@@ -7,7 +7,8 @@ int             main()
   int           i = 0;
 
   firmata = firmata_new("/dev/ttyACM0");
-  sleep(5);
+  while(!firmata->isReady)
+    firmata_pull(firmata);
   firmata_pinMode(firmata, 13, MODE_OUTPUT);
   while (1)
     {

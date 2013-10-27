@@ -65,6 +65,8 @@
 #define FIRMATA_SYSEX_NON_REALTIME      0x7E // MIDI Reserved for non-realtime messages
 #define FIRMATA_SYSEX_REALTIME          0x7F // MIDI Reserved for realtime messages
 
+#define FIRMATA_MSG_LEN			1024
+
 typedef struct		s_pin
 {
   uint8_t		mode;
@@ -77,6 +79,11 @@ typedef struct		s_firmata
 {
   t_serial		*serial;
   t_pin			pins[128];
+  int			parse_command_len;
+  int			parse_count;
+  uint8_t		parse_buff[FIRMATA_MSG_LEN];
+  int			isReady;
+  char			firmware[140];
 }			t_firmata;
 
 t_firmata		*firmata_new(char *name);
@@ -85,5 +92,8 @@ int			firmata_askFirmware(t_firmata *firmata);
 int			firmata_pinMode(t_firmata *firmata, int pin, int mode);
 int			firmata_digitalWrite(t_firmata *firmata, int pin, int value);
 int			firmata_analogWrite(t_firmata *firmata, int pin, int value);
+int			firmata_pull(t_firmata *firmata);
+void			firmata_parse(t_firmata *firmata, const uint8_t *buf, int len);
+void			firmata_endParse(t_firmata *firmata);
 
 #endif
