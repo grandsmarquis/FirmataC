@@ -45,4 +45,4 @@ See License file included in sources.
 Thanks
 ------
 
-Special thanks to Paul Stoffregen for is Firmata GUI-friendly that helped much!
+Special thanks to Paul Stoffregen for the [Firmata GUI-friendly](http://firmata.org/wiki/Main_Page) that helped much!
