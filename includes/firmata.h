@@ -84,5 +84,6 @@ void			firmata_initPins(t_firmata *firmata);
 int			firmata_askFirmware(t_firmata *firmata);
 int			firmata_pinMode(t_firmata *firmata, int pin, int mode);
 int			firmata_digitalWrite(t_firmata *firmata, int pin, int value);
+int			firmata_analogWrite(t_firmata *firmata, int pin, int value);
 
 #endif

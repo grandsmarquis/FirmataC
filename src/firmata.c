@@ -86,6 +86,19 @@ int		firmata_pinMode(t_firmata *firmata, int pin, int mode)
   return (res);
 }
 
+int		firmata_analogWrite(t_firmata *firmata, int pin, int value)
+{
+  int		res;
+
+  uint8_t buff[3];
+  printf("Writting analogWrite at: %i with value: %i\n", pin, value);
+  buff[0] = 0xE0 | pin;
+  buff[1] = value & 0x7F;
+  buff[2] = (value >> 7) & 0x7F;
+  res = serial_write(firmata->serial, buff, 3);
+  return (res);
+}
+
 int		firmata_digitalWrite(t_firmata *firmata, int pin, int value)
 {
   int		i;
