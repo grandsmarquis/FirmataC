@@ -4,7 +4,6 @@ int		main()
 {
   t_firmata	*firmata;
   t_servo	*servo;
-  int		i = 0;
 
   firmata = firmata_new("/dev/ttyACM0");
   while(!firmata->isReady)
@@ -14,9 +13,9 @@ int		main()
   while (1)
     {
       usleep(10000);
-      if (i == 180)
-	i = 0;
-      servo_write(servo, i++);
+      if (servo->value == 180)
+	servo->value = 0;
+      servo_write(servo, servo->value++);
     }
 }
 
