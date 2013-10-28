@@ -13,12 +13,10 @@ int		main()
   servo = servo_attach(firmata, 3);
   while (1)
     {
-      firmata_pull(firmata);
-      i++;
       usleep(10000);
       if (i == 180)
 	i = 0;
-      servo_write(servo, i);
+      servo_write(servo, i++);
     }
 }
 
