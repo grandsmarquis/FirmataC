@@ -27,6 +27,5 @@ t_servo		*servo_attach(t_firmata *firmata, int pin)
 
 int		servo_write(t_servo *servo, int value)
 {
-  servo->value = value;
   return (firmata_analogWrite(servo->firmata, servo->pin, value));
 }

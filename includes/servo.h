@@ -8,7 +8,6 @@ typedef struct	s_servo
 {
   t_firmata	*firmata;
   int		pin;
-  int		value;
 }		t_servo;
 
 t_servo		*servo_attach(t_firmata *firmata, int pin);
